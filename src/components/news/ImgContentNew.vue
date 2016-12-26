@@ -1,5 +1,5 @@
 <template>
-    <div class="news">
+    <div class="tmpl">
     	<header class="mui-bar mui-bar-nav">
 			<router-link to="/Home" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">返回</router-link>
 			<h1 class="mui-title">图文资讯</h1>

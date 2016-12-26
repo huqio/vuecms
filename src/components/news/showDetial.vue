@@ -1,5 +1,5 @@
 <template>
-    <div class="news">
+    <div class="tmpl">
     	<header class="mui-bar mui-bar-nav">
 			<router-link to="/news/imgcontentnews" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">返回</router-link>
 			<h1 class="mui-title">资讯详情</h1>
@@ -63,6 +63,7 @@ a,a:link{ text-decoration:none; }
 .entry{
 	margin-bottom: 50px;
 	padding: 5px;
+	color:#5c5c5c; 
 }
 	
 

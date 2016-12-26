@@ -25,7 +25,7 @@
       <div id="imgs">
       <ul id="container" v-if="images"> 
 		 <li v-for="item in images">
-		 	<router-link to="/photo">
+		 	<router-link v-bind="{to:'/photo/'+item.id}">
 				<img v-lazy="item.img_url" :key="item.img_url">
 				<div class="info">
                 <h2>{{item.title}}</h2>

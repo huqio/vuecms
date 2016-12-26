@@ -30,6 +30,10 @@ module.exports ={
           loader: 'babel',
           exclude: /node_modules/
         },
+        {
+          test: /vue-preview.src.*?js$/,
+          loader: 'babel'
+      },
       {
         test: /\.css$/,
         loaders: ['style-loader', 'css-loader', 'autoprefixer']
