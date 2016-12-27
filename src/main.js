@@ -47,6 +47,9 @@ import showNewsDetial from 'comp/news/showDetial'
 import photolist from 'comp/photo/photolist'
 import photo from 'comp/photo/photo'
 
+//商品展示列表
+import goodlist from 'comp/goods/goodlist'
+
 const router = new VueRouter({
 	linkActiveClass:'mui-active', //可以修改router-link-active 为mui-active来解决tab栏的选中bug
     mode: 'history',  //不想看到#号则配置这个 (可以用来解决与html本身锚点冲突的问题)
@@ -59,7 +62,8 @@ const router = new VueRouter({
         { path: '/news/imgcontentnews', component: imgcontentnews }, //图文资讯
         { path: '/news/showdetial/:id', component: showNewsDetial }, //图文资讯详细
         { path:'/photolist',component:photolist},  //图片分享列表
-        { path:'/photo/:id',component:photo}  //图片详情
+        { path:'/photo/:id',component:photo},  //图片详情
+        { path:'/goodslist',component:goodlist}  //商品列表
     ]
 })
 

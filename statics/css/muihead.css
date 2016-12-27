@@ -1,7 +1,9 @@
 .tmpl .mui-bar{
    	position:inherit;
    }
-   
+.tmpl{
+	margin-bottom: 50px;
+}
 .mui-title{
 	font-size: 18px;
 	color:#007aff;

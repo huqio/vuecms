@@ -20,7 +20,7 @@
       <!--
       	作者：ivanyb@qq.com
       	时间：2016-12-15
-      	描述：图片展示区
+      	描述：图片展示区(mint-ui中的图片延迟加载组件)
       -->
       <div id="imgs">
       <ul id="container" v-if="images"> 

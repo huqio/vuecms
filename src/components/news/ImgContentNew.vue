@@ -11,7 +11,7 @@
 					<div class="mui-media-body">
 						{{item.title}}
 						<p class='mui-ellipsis'>
-							发表时间：{{item.add_time | dateFmt('YYYY-MM-DD	')}}
+							发表时间：{{item.add_time | dateFmt('YYYY-MM-DD')}}
 						
 							<span>点击：{{item.click}}</span>
 						</p>

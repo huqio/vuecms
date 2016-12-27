@@ -38,7 +38,7 @@
 			</li>
 			<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
 
-				<router-link to="/search">
+				<router-link to="/goodslist">
 					<span class="mui-icon mui-icon-chatbubble"></span>
 					<div class="mui-media-body">商品展示</div>
 				</router-link>
