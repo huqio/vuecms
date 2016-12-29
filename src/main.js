@@ -16,6 +16,8 @@ Vue.use(VueRouter)
 Vue.use(vueResource)
 
 Vue.use(MintUI)  //注册全局组件
+import store from './vuex/store.js'
+
 
 //注册图片预览组件
 import VuePreview from 'vue-preview'
@@ -75,6 +77,7 @@ const router = new VueRouter({
 
 new Vue({
   el: '#app',
+  store:store,
   router:router, //使用路由对象实例
   render: h => h(App)
 })

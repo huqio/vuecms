@@ -1,5 +1,8 @@
 <template>
     <div class="tmpl">
+        <div class="back">
+            <a @click="goback">返回</a>
+        </div>
         <!--1.0 商品图片滚动区域-->
         <comp-swipe class="compswipe" :list="imglist"></comp-swipe>
 
@@ -54,7 +57,18 @@
 
     </div>
 </template>
-<style>
+<style scoped>
+    .back{
+        position: fixed;
+        top: 10px;
+        left:5px;
+        z-index: 5;
+    }
+    .back a{
+        font-size: 16px;
+        font-weight: 700;
+        color: white;
+    }
     .tmpl{
         font-size: 12px;
     }
@@ -166,7 +180,8 @@
             },
             //3.0 加入购物车
             intoShopCar:function(){
-                this.$emit('shopcarcount',this.count);
+                let id = this.$route.params.id;
+                this.$store.commit('goodsshopCardatas',{goodsid:id,count:this.count});
             },
             //4.0 立即购买
             buy:function () {
@@ -175,8 +190,12 @@
             //5.0 获取购买数量值
             getnum:function(count){
                 this.count = count;
+            },
+            //6.0 返回到前一页
+            goback:function () {
+                this.$router.go(-1);
             }
-        },
+    },
         components:{
             CompSwipe,
             InputNumber

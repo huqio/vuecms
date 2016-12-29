@@ -18,7 +18,8 @@
             </router-link>
             <router-link class="mui-tab-item" to="/car">
 				<span class="mui-icon mui-icon-extra mui-icon-extra-cart">
-					<span v-on:shopcarcount="getGoodsCount" class="mui-badge" v-show="goodscount>0" v-text="goodscount"></span>
+					<span v-show="goodscount>0" class="mui-badge" v-text="goodscount"></span>
+                    <span v-show="goodscount<=0" class="mui-badge" v-text="locdscount"></span>
 				</span>
                 <span class="mui-tab-label">购物车</span>
             </router-link>
@@ -31,17 +32,38 @@
 </template>
 
 <script>
+    import shopcarkits from './components/goods/shopcarkits.js'
 
     export default {
         name: 'app',
         data () {
             return {
-                goodscount:0
+                locdscount:0
             }
         },
         methods:{
-            getGoodsCount:function(count){
-                this.goodscount = count; //获取商品详情页面的事件通知传入的商品个数
+
+        },
+        created (){
+//            let key  = 'shopcardata';
+//                //localStorage来存储购物车数据
+//            let locstorage = window.localStorage;
+//            let datas = locstorage.getItem(key);
+//            if(!datas){
+//                return;
+//            }
+//            let shopCardatas = JSON.parse(datas);
+//            let tmpcount = 0;
+//            shopCardatas.forEach((item)=>{
+//                tmpcount+=item.count;
+//        });
+//            this.locdscount = tmpcount;
+            this.locdscount = shopcarkits.reloadCount();
+        },
+        computed:{
+            goodscount: function(){
+//                console.log(this.$store.getters.shopCardatas);
+                return this.$store.getters.shopCarCount;
             }
         }
     }

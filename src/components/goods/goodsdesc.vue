@@ -11,7 +11,7 @@
         <div class="gdesc" v-html="desc.content"></div>
     </div>
 </template>
-<style>
+<style scoped>
 .back{
     position: fixed;
     top: 10px;
@@ -33,7 +33,7 @@
         padding: 5px;
     }
     .gdesc img{
-        max-width: 100%;
+        /*max-width: 100%;*/
     }
 </style>
 <script>
