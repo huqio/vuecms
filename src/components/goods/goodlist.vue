@@ -20,7 +20,7 @@
 
             <!--</li>-->
             <li class="mui-table-view-cell mui-media mui-col-xs-6" v-for="item in list">
-                <router-link v-bind="{to:'/goods/'+item.id}">
+                <router-link v-bind="{to:'/goods/info/'+item.id}">
                     <div class="itemwarp">
                         <img class="mui-media-object" v-lazy="item.img_url" :key="item.img_url">
                         <div class="mui-media-body">
@@ -36,9 +36,7 @@
                         </div>
                     </div>
                 </router-link>
-
             </li>
-
         </ul>
         <!--图片列表区域end-->
     </div>

@@ -49,6 +49,9 @@ import photo from 'comp/photo/photo'
 
 //商品展示列表
 import goodlist from 'comp/goods/goodlist'
+import goodsInfo from 'comp/goods/goodsInfo'
+import goodscomment from 'comp/subcomp/comment'
+import goodsdesc from 'comp/goods/goodsdesc'
 
 const router = new VueRouter({
 	linkActiveClass:'mui-active', //可以修改router-link-active 为mui-active来解决tab栏的选中bug
@@ -63,7 +66,10 @@ const router = new VueRouter({
         { path: '/news/showdetial/:id', component: showNewsDetial }, //图文资讯详细
         { path:'/photolist',component:photolist},  //图片分享列表
         { path:'/photo/:id',component:photo},  //图片详情
-        { path:'/goodslist',component:goodlist}  //商品列表
+        { path:'/goodslist',component:goodlist},  //商品列表
+        { path:'/goods/info/:id',component:goodsInfo},  //商品详情
+        { name:'goodscomment', path:'/goods/comment/:id',component:goodscomment},  //商品评论
+        { name:'goodsdesc', path:'/goods/desc/:id',component:goodsdesc}  //商品评论
     ]
 })
 

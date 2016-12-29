@@ -6,13 +6,14 @@
     	描述：首页轮播图片区域
     	组件：mint-ui
     -->
-		<swipe class="my-swipe">
-			<swipe-item class="slide1" v-for="item in list">
-				<a :href="item.url">
-					<img :src="item.img">
-				</a>
-			</swipe-item>
-		</swipe>
+		<!--<swipe class="my-swipe">-->
+			<!--<swipe-item class="slide1" v-for="item in list">-->
+				<!--<a :href="item.url">-->
+					<!--<img :src="item.img">-->
+				<!--</a>-->
+			<!--</swipe-item>-->
+		<!--</swipe>-->
+		<comp-swipe :list="list"></comp-swipe>
 		<!--
 	作者：ivanyb@qq.com
 	时间：2016-12-06
@@ -71,7 +72,8 @@
 </template>
 
 <script>
-	import {Swipe,SwipeItem} from 'mint-ui';
+//	import {Swipe,SwipeItem} from 'mint-ui';
+	import CompSwipe from '../subcomp/swipe'
 	export default {
 		data() {
 				return {
@@ -92,37 +94,13 @@
 				//	 	});
 			},
 			components: {
-				Swipe,
-				SwipeItem
+				CompSwipe
 			}
 	}
 </script>
 
 <style scoped>
-	.my-swipe {
-		height: 250px;
-		color: #fff;
-		font-size: 30px;
-		text-align: center;
-	}
-	
-	.slide1 a,
-	.slide1 img {
-		display: block;
-		width: 100%;
-		height: 250px;
-	}
-	
-	.mint-swipe-indicator {
-		opacity: 1;
-		background: rgba(239, 239, 239, 0.8);
-	}
-	
-	.mint-swipe-indicator.is-active {
-		opacity: 1;
-		background: rgba(250, 250, 10, 0.8)
-	}
-	
+
 	.mui-icon {
 		width: 50px;
 		height: 50px;

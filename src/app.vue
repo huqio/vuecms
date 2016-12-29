@@ -18,7 +18,7 @@
             </router-link>
             <router-link class="mui-tab-item" to="/car">
 				<span class="mui-icon mui-icon-extra mui-icon-extra-cart">
-					<span class="mui-badge">1</span>
+					<span v-on:shopcarcount="getGoodsCount" class="mui-badge" v-show="goodscount>0" v-text="goodscount"></span>
 				</span>
                 <span class="mui-tab-label">购物车</span>
             </router-link>
@@ -35,13 +35,14 @@
     export default {
         name: 'app',
         data () {
-            return {}
+            return {
+                goodscount:0
+            }
         },
-        components: {}
-        ,
-        created (){
-            //当app.vue创建完成以后，自动加载Home.vue模块
-            // window.location='/#/Home';
+        methods:{
+            getGoodsCount:function(count){
+                this.goodscount = count; //获取商品详情页面的事件通知传入的商品个数
+            }
         }
     }
 </script>
