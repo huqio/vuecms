@@ -51,17 +51,23 @@
                 count:1
             }
         },
+        props:['options'],
+        created(){
+            this.count = this.options.initcount>0?this.options.initcount:1;
+        },
         methods:{
             add:function(){
                 this.count ++;
-                this.$emit('val',this.count);
+                this.options.type="add";
+                this.$emit('val',this.count,this.options);
             },
             substrict:function(){
                 if(this.count <=1){
                     return;
                 }
                 this.count --;
-                this.$emit('val',this.count);
+                this.options.type="substract";
+                this.$emit('val',this.count,this.options);
             }
         },
         components:{

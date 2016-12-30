@@ -9,21 +9,31 @@
         <!--2.0 商品购物区-->
         <div class="shopinfo">
             <div class="title">
-                <h1 class="">Shinco/新科 S2300 无线麦克风 无线手持话筒 双手麦 KTV 舞台</h1>
+                <h1 class="" v-text="goodsinfo.title"></h1>
             </div>
             <ul>
                 <li>
-                    <span>市场价：</span><s>￥269.00</s>
+                    <span>市场价：</span><s>￥{{ goodsinfo.market_price}}</s>
                     <label class="sellpricetitle">销售价：</label>
-                    <span class="sellprice">￥99.00</span>
+                    <span class="sellprice">￥{{ goodsinfo.sell_price}}</span>
                 </li>
                 <li class="sell">
                     <div class="sellcount">购买数量：</div>
-                    <input-Number v-on:val="getnum" class="inputnumber"></input-Number>
+                    <input-Number ref="inputnumbercomp" v-on:val="getnum"
+                                  :options="{}"
+                                  class="inputnumber"></input-Number>
+                    <transition name="drop"
+                                @before-enter="beforeEnter"
+                                @enter="enter"
+                                @after-enter="afterEnter">
+                        <div v-show="isdrop" class="ball">
+                        </div>
+                    </transition>
                 </li>
                 <li>
                     <mt-button type="primary" size="small" @click="buy">立即购买</mt-button>
                     <mt-button type="danger" size="small" @click="intoShopCar">加入购物车</mt-button>
+
                 </li>
             </ul>
         </div>
@@ -34,15 +44,15 @@
             <ul>
                 <li>
                     <label>商品货号：</label>
-                    <span>SD000011</span>
+                    <span v-text="goodsinfo.goods_no"></span>
                 </li>
                 <li>
                     <label>库存情况：</label>
-                    <span>415件</span>
+                    <span>{{goodsinfo.stock_quantity}}件</span>
                 </li>
                 <li>
                     <label>上架时间：</label>
-                    <span>2016-2-2 12:00:00</span>
+                    <span>{{goodsinfo.add_time | dateFmt('YYYY-MM;DD HH:mm:ss')}}</span>
                 </li>
             </ul>
 
@@ -117,6 +127,36 @@
   .shopinfo .sellpricetitle{
       margin-left: 20px;;
   }
+  /*点击按钮小球飘入*/
+  .ball{
+      width: 20px;
+      height: 20px;
+      background: red;
+      -webkit-border-radius:50%;
+      -moz-border-radius:50%;
+      border-radius:50%;
+      position: relative;
+      left:-50%;
+      top:5px;
+      opacity: 1;
+      transition: all .5s cubic-bezier(.38,-0.38,.97,.68);
+      /*transition: all .5s ease*/
+  }
+  /*小球动画css*/
+    /*.drop-enter-active{*/
+        /*transition: all 1s ease;*/
+    /*}*/
+    /*.drop-leave-active{*/
+        /*transition: all 1s ease;*/
+    /*}*/
+    /*.drop-enter{*/
+        /*opacity: 1;*/
+        /*transform: translate(30px,400px);*/
+    /*}*/
+    /*.drop-leave-active{*/
+        /*opacity: 1;*/
+        /*transform: translate(30px,400px);*/
+    /*}*/
 
    /*3.0 商品参数区*/
    .goodsvalue{
@@ -144,15 +184,28 @@
     export default{
         data(){
             return{
+                goodsinfo:{},
+                isdrop:false,
                 count:1, //购买数量
                 imgdomain:common.imgDomain,     //图片的7牛域名
                 imglist:[] //商品图片滚动区的图片数组
             }
         },
         created(){
+            // 获取滚动图片
             this.getimgList();
+            // 获取标题，参数区数据和价格
+            this.getgoodsinfo();
         },
         methods:{
+            //0.0 获取标题，参数区数据和价格
+            getgoodsinfo(){
+                let id=  this.$route.params.id;
+                this.$http.get(common.dataApiDomain+'/api/goods/getinfo/'+id)
+                        .then((res)=>{
+                    this.goodsinfo = res.body.message[0];
+                });
+            },
             //1.0 获取滚动图片数组
             getimgList:function(){
                 let id=  this.$route.params.id;
@@ -182,6 +235,8 @@
             intoShopCar:function(){
                 let id = this.$route.params.id;
                 this.$store.commit('goodsshopCardatas',{goodsid:id,count:this.count});
+
+                this.isdrop = !this.isdrop;
             },
             //4.0 立即购买
             buy:function () {
@@ -194,6 +249,30 @@
             //6.0 返回到前一页
             goback:function () {
                 this.$router.go(-1);
+            },
+            //7.0 动画
+            beforeEnter (el) {
+                //计算出inputnumber空间的位置
+//               let inputnumber =  this.$refs.inputnumbercomp;
+//               let left =  inputnumber.$el.offsetLeft;
+//               let top =  inputnumber.offsetTop;
+                let left =  0;
+                let top =  0;
+                //使用translate3d会自动启用硬件加速
+                el.style.webkitTransform = `translate3d(${left}px,${top}px,0)`;
+                el.style.transform = `translate3d(${left}px,${top}px,0)`;
+            },
+            enter (el, done) {
+                //重新渲染页面
+                let refresh = el.offsetHeight;
+                el.style.webkitTransform = 'translate3d(75px,400px,0)';
+                el.style.transform = 'translate3d(75px,400px,0)';
+
+                done();
+            },
+            afterEnter (el) {
+                //控制小球显示和影藏的变量
+                this.isdrop = !this.isdrop;
             }
     },
         components:{
